@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+}
+
+@layer components {
+  /* Glass morphism utilities */
+  .glass {
+    @apply bg-white/10 dark:bg-white/5 backdrop-blur-md border border-white/20 dark:border-white/10;
+  }
+  
+  .glass-card {
+    @apply glass rounded-2xl shadow-xl shadow-black/5 dark:shadow-black/20;
+  }
+  
+  .glass-button {
+    @apply glass rounded-xl px-6 py-3 font-semibold transition-all duration-300 hover:bg-white/20 dark:hover:bg-white/10 hover:shadow-lg hover:shadow-accent-blue-500/25 hover:scale-105;
+  }
+  
+  .glass-input {
+    @apply glass rounded-lg px-4 py-3 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent-blue-500/50 focus:border-transparent transition-all duration-300;
+  }
+  
+  .glass-nav {
+    @apply fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-cool-slate-900/80 backdrop-blur-xl border-b border-white/20 dark:border-white/10 shadow-lg shadow-black/5 dark:shadow-black/20;
+  }
+  
+  /* Gradient backgrounds */
+  .gradient-bg {
+    @apply bg-gradient-to-br from-accent-blue-50 via-white to-soft-coral-50 dark:from-cool-slate-900 dark:via-cool-slate-800 dark:to-accent-blue-900;
+  }
+  
+  .gradient-text {
+    @apply bg-gradient-to-r from-accent-blue-600 to-soft-coral-500 bg-clip-text text-transparent;
+  }
+  
+  /* Hover effects */
+  .hover-lift {
+    @apply transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-black/10 dark:hover:shadow-black/30;
+  }
+  
+  .hover-glow {
+    @apply transition-all duration-300 hover:shadow-lg hover:shadow-accent-blue-500/25;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100 dark:bg-cool-slate-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 dark:bg-cool-slate-600 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400 dark:bg-cool-slate-500;
+}
+
+/* Selection styling */
+::selection {
+  @apply bg-accent-blue-200 dark:bg-accent-blue-800 text-accent-blue-900 dark:text-accent-blue-100;
+}
