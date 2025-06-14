@@ -7,19 +7,19 @@ const Portlify = () => {
     {
       title: "Academic Portfolio",
       description: "Perfect for researchers and educators",
-      url: "https://example.com/academic-sample",
+      url: "https://albert-francis.vercel.app/",
       category: "Academic"
     },
     {
       title: "Creative Professional",
       description: "Ideal for designers and artists",
-      url: "https://example.com/creative-sample",
+      url: "https://sebastian-jose.vercel.app/",
       category: "Creative"
     },
     {
       title: "Business Executive",
       description: "Suited for business professionals",
-      url: "https://example.com/business-sample",
+      url: "https://expressive-ai.vercel.app/",
       category: "Business"
     }
   ];
@@ -27,13 +27,13 @@ const Portlify = () => {
   const plans = [
     {
       name: "Student",
-      originalPrice: 498,
-      discountedPrice: 249,
-      discount: "50% OFF",
+      originalPrice: 1000,
+      discountedPrice: 250,
+      discount: "75% OFF",
       icon: <Users className="h-8 w-8" />,
       features: [
         "AI CV to Portfolio Conversion",
-        "5 Professional Templates",
+        "Professional Templates",
         "Basic SEO Optimization",
         "Personal Domain Setup",
         "Mobile Responsive Design",
@@ -45,13 +45,13 @@ const Portlify = () => {
     },
     {
       name: "Professional",
-      originalPrice: 1000,
+      originalPrice: 2000,
       discountedPrice: 500,
-      discount: "50% OFF",
+      discount: "75% OFF",
       icon: <Briefcase className="h-8 w-8" />,
       features: [
         "Everything in Student",
-        "15 Premium Templates",
+        "Premium Templates",
         "Advanced SEO & Analytics",
         "Custom Domain Integration",
         "Social Media Integration",
@@ -64,9 +64,9 @@ const Portlify = () => {
     },
     {
       name: "Custom Build",
-      originalPrice: 1500,
+      originalPrice: 3000,
       discountedPrice: 750,
-      discount: "50% OFF",
+      discount: "75% OFF",
       icon: <Palette className="h-8 w-8" />,
       features: [
         "Everything in Professional",
@@ -92,7 +92,7 @@ const Portlify = () => {
     {
       icon: <Palette className="h-6 w-6" />,
       title: "Professional Templates",
-      description: "Choose from hundreds of professionally designed templates"
+      description: "Professionally themed templates to build your resume"
     },
     {
       icon: <Globe className="h-6 w-6" />,

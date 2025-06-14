@@ -99,7 +99,6 @@ const LoveBackground = () => (
 );
 
 const Home = () => {
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [isVisible, setIsVisible] = useState({});
 
   const features = [
@@ -140,27 +139,6 @@ const Home = () => {
     { number: "24/7", label: "AI Assistance", icon: <Clock className="h-6 w-6" /> }
   ];
 
-  const testimonials = [
-    {
-      name: "Dr. Sarah Chen",
-      role: "Research Professor",
-      text: "This platform transformed how I present my research. The AI understands academic nuance.",
-      avatar: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg"
-    },
-    {
-      name: "Marcus Rivera",
-      role: "Creative Director",
-      text: "Finally, an AI that gets creativity. It's like having a brilliant collaborator who never sleeps.",
-      avatar: "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg"
-    },
-    {
-      name: "Emma Thompson",
-      role: "Business Strategist",
-      text: "The insights are game-changing. Our strategy presentations have never been more compelling.",
-      avatar: "https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg"
-    }
-  ];
-
   const whoWeServe = [
     { 
       title: "Visionary Educators", 
@@ -191,13 +169,7 @@ const Home = () => {
       bgImage: "https://images.pexels.com/photos/256262/pexels-photo-256262.jpeg"
     }
   ];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, []);
+  
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -423,64 +395,58 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="py-24 bg-gradient-to-r from-purple-100/50 via-blue-100/50 to-cyan-100/50 dark:from-purple-900/20 dark:via-blue-900/20 dark:to-cyan-900/20 transition-colors duration-500">
+      {/* How It Works Section */}
+      <section className="py-24 bg-gradient-to-r from-sky-100/50 via-indigo-100/50 to-blue-100/50 dark:from-sky-900/20 dark:via-indigo-900/20 dark:to-blue-900/20 transition-colors duration-500">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6">
-              Loved by Creators Worldwide
+              How Expressive AI Works
             </h2>
             <p className="text-xl text-slate-600 dark:text-slate-300">
-              See what our community has to say
+              A simple, powerful process — from idea to impact
             </p>
           </div>
 
-          <div className="relative max-w-4xl mx-auto">
-            <div className="glass-card p-12 text-center relative overflow-hidden bg-white/40 dark:bg-black/40 backdrop-blur-xl border border-white/40 dark:border-white/20 rounded-3xl">
-              <div className="absolute -top-6 -left-6 w-24 h-24 bg-gradient-to-br from-yellow-400/20 to-orange-400/20 dark:from-yellow-300/30 dark:to-orange-300/30 rounded-full blur-xl"></div>
-              <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-to-br from-blue-400/20 to-purple-400/20 dark:from-blue-300/30 dark:to-purple-300/30 rounded-full blur-xl"></div>
-              
-              <div className="relative z-10">
-                <MessageCircle className="h-12 w-12 text-blue-600 dark:text-blue-400 mx-auto mb-6" />
-                <div className="mb-8">
-                  <p className="text-2xl text-slate-700 dark:text-slate-300 mb-6 italic leading-relaxed">
-                    "{testimonials[currentTestimonial].text}"
-                  </p>
-                  <div className="flex items-center justify-center space-x-4">
-                    <img 
-                      src={testimonials[currentTestimonial].avatar} 
-                      alt={testimonials[currentTestimonial].name}
-                      className="w-16 h-16 rounded-full object-cover border-4 border-white dark:border-slate-600 shadow-lg"
-                    />
-                    <div className="text-left">
-                      <h4 className="font-bold text-slate-900 dark:text-white text-lg">
-                        {testimonials[currentTestimonial].name}
-                      </h4>
-                      <p className="text-slate-600 dark:text-slate-300">
-                        {testimonials[currentTestimonial].role}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="flex justify-center space-x-2">
-                  {testimonials.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setCurrentTestimonial(index)}
-                      className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                        index === currentTestimonial 
-                          ? 'bg-blue-600 dark:bg-blue-400 scale-125' 
-                          : 'bg-slate-300 dark:bg-slate-600 hover:bg-blue-400 dark:hover:bg-blue-500'
-                      }`}
-                    />
-                  ))}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div className="glass-card p-8 text-center bg-white/40 dark:bg-black/40 backdrop-blur-xl border border-white/40 dark:border-white/20 rounded-3xl transition-all">
+              <div className="mb-6">
+                <div className="w-16 h-16 mx-auto flex items-center justify-center rounded-full bg-blue-500/10 dark:bg-blue-400/10 text-blue-600 dark:text-blue-400 text-3xl font-bold">
+                  1
                 </div>
               </div>
+              <h3 className="text-xl font-semibold text-slate-800 dark:text-white mb-4">Input Your Vision</h3>
+              <p className="text-slate-600 dark:text-slate-300">
+                Describe your idea, project, or business challenge. Our tools are built to understand nuance and intent.
+              </p>
+            </div>
+
+            <div className="glass-card p-8 text-center bg-white/40 dark:bg-black/40 backdrop-blur-xl border border-white/40 dark:border-white/20 rounded-3xl transition-all">
+              <div className="mb-6">
+                <div className="w-16 h-16 mx-auto flex items-center justify-center rounded-full bg-violet-500/10 dark:bg-violet-400/10 text-violet-600 dark:text-violet-400 text-3xl font-bold">
+                  2
+                </div>
+              </div>
+              <h3 className="text-xl font-semibold text-slate-800 dark:text-white mb-4">Generate & Refine</h3>
+              <p className="text-slate-600 dark:text-slate-300">
+                Use expressive, human-centered AI to co-create drafts, insights, visuals, or strategies — instantly.
+              </p>
+            </div>
+
+            <div className="glass-card p-8 text-center bg-white/40 dark:bg-black/40 backdrop-blur-xl border border-white/40 dark:border-white/20 rounded-3xl transition-all">
+              <div className="mb-6">
+                <div className="w-16 h-16 mx-auto flex items-center justify-center rounded-full bg-emerald-500/10 dark:bg-emerald-400/10 text-emerald-600 dark:text-emerald-400 text-3xl font-bold">
+                  3
+                </div>
+              </div>
+              <h3 className="text-xl font-semibold text-slate-800 dark:text-white mb-4">Launch with Confidence</h3>
+              <p className="text-slate-600 dark:text-slate-300">
+                Export, share, or implement outputs directly into your workflows with full creative control.
+              </p>
             </div>
           </div>
         </div>
       </section>
+
 
       {/* Who We Serve Section - With Background Vectors */}
       <section id="audience" className="py-24 bg-slate-50/50 dark:bg-slate-900/50 transition-colors duration-500 relative">

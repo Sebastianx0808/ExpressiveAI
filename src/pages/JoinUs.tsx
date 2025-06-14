@@ -1,87 +1,14 @@
-import React, { useState } from 'react';
-import { Mail, Users, Sparkles, Bell } from 'lucide-react';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Mail, Users, Sparkles, Bell, ExternalLink } from 'lucide-react';
 
 const JoinUs = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    role: '',
-    interests: []
-  });
-
-  const [submitted, setSubmitted] = useState(false);
-
-  const roles = [
-    'Student',
-    'Teacher/Educator',
-    'Researcher/Academic',
-    'Creative Professional',
-    'Business Strategist',
-    'Institution/Organization',
-    'Other'
-  ];
-
-  const interestOptions = [
-    { id: 'portlify', label: 'Portlify - Digital Portfolio Builder' },
-    { id: 'writer', label: 'Expressive Writer - Academic Writing Assistant' },
-    { id: 'bizintellect', label: 'BizIntellect - Business Analysis AI' },
-    { id: 'eduplan', label: 'EduPlan AI - Lesson Planning Co-pilot' },
-    { id: 'marketmuse', label: 'MarketMuse - Creative SEO & Content' },
-    { id: 'services', label: 'Custom AI Services & Consultation' },
-    { id: 'workshops', label: 'AI Training Workshops' },
-    { id: 'partnerships', label: 'Partnership Opportunities' }
-  ];
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleInterestChange = (interestId: string) => {
-    setFormData(prev => ({
-      ...prev,
-      interests: prev.interests.includes(interestId)
-        ? prev.interests.filter(id => id !== interestId)
-        : [...prev.interests, interestId]
-    }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Form submitted:', formData);
-    setSubmitted(true);
-  };
-
-  if (submitted) {
-    return (
-      <div className="min-h-screen gradient-bg flex items-center justify-center py-20">
-        <div className="max-w-md mx-auto text-center">
-          <div className="glass-card p-8">
-            <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Sparkles className="h-8 w-8 text-green-600 dark:text-green-400" />
-            </div>
-            <h2 className="text-2xl font-bold text-cool-slate-900 dark:text-white mb-4">
-              Welcome to Expressive AI!
-            </h2>
-            <p className="text-cool-slate-600 dark:text-cool-slate-300 mb-6">
-              Thank you for joining our early access community. We'll keep you updated on our progress and notify you when new products become available.
-            </p>
-            <div className="glass bg-accent-blue-50/50 dark:bg-accent-blue-900/20 rounded-lg p-4">
-              <p className="text-accent-blue-800 dark:text-accent-blue-300 text-sm">
-                Check your email for a confirmation message and exclusive early access updates.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  // Google Forms embed URL - replace with your actual Google Form URL
+  const googleFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLSedTqbrzaqeQn8jEculkeF2FZiv6v5qoxeNpXVIYhEMj1_tIQ/viewform?usp=header";
 
   return (
     <div className="py-20 gradient-bg animate-fade-in">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12 animate-slide-up">
           <div className="glass-card p-8 max-w-4xl mx-auto">
@@ -132,101 +59,75 @@ const JoinUs = () => {
                   </div>
                 </div>
               </div>
+
+              {/* Fallback link in case iframe doesn't load */}
+              <div className="mt-8 p-4 glass bg-cool-slate-50/50 dark:bg-cool-slate-800/50 rounded-lg">
+                <p className="text-sm text-cool-slate-600 dark:text-cool-slate-300 mb-3">
+                  Having trouble with the form?
+                </p>
+                <a
+                  href={googleFormUrl.replace('?embedded=true', '')}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-accent-blue-600 dark:text-accent-blue-400 hover:text-accent-blue-700 dark:hover:text-accent-blue-300 transition-colors"
+                >
+                  <ExternalLink className="h-4 w-4" />
+                  Open form in new tab
+                </a>
+              </div>
             </div>
           </div>
 
-          {/* Form */}
+          {/* Google Forms Container */}
           <div className="lg:col-span-2">
             <div className="glass-card p-8">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Basic Info */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-cool-slate-700 dark:text-cool-slate-300 mb-2">
-                      Full Name *
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      required
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      className="glass-input w-full text-cool-slate-900 dark:text-white"
-                      placeholder="Enter your full name"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-cool-slate-700 dark:text-cool-slate-300 mb-2">
-                      Email Address *
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      required
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      className="glass-input w-full text-cool-slate-900 dark:text-white"
-                      placeholder="your@email.com"
-                    />
-                  </div>
-                </div>
+              <div className="mb-6">
+                <h2 className="text-2xl font-bold text-cool-slate-900 dark:text-white mb-2">
+                  Join Our Early Access Program
+                </h2>
+                <p className="text-cool-slate-600 dark:text-cool-slate-300">
+                  Fill out the form below to get exclusive early access to our AI tools and services.
+                </p>
+              </div>
 
-                {/* Role Selection */}
-                <div>
-                  <label htmlFor="role" className="block text-sm font-medium text-cool-slate-700 dark:text-cool-slate-300 mb-2">
-                    Who are you? *
-                  </label>
-                  <select
-                    id="role"
-                    name="role"
-                    required
-                    value={formData.role}
-                    onChange={handleInputChange}
-                    className="glass-input w-full text-cool-slate-900 dark:text-white"
-                  >
-                    <option value="">Select your role</option>
-                    {roles.map(role => (
-                      <option key={role} value={role}>{role}</option>
-                    ))}
-                  </select>
-                </div>
-
-                {/* Interests */}
-                <div>
-                  <label className="block text-sm font-medium text-cool-slate-700 dark:text-cool-slate-300 mb-3">
-                    What are you most interested in? (Select all that apply)
-                  </label>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {interestOptions.map(option => (
-                      <label key={option.id} className="flex items-start space-x-3 cursor-pointer glass p-3 rounded-lg hover:bg-white/20 dark:hover:bg-white/10 transition-colors">
-                        <input
-                          type="checkbox"
-                          checked={formData.interests.includes(option.id)}
-                          onChange={() => handleInterestChange(option.id)}
-                          className="mt-1 h-4 w-4 text-accent-blue-600 focus:ring-accent-blue-500 border-cool-slate-300 dark:border-cool-slate-600 rounded"
-                        />
-                        <span className="text-sm text-cool-slate-700 dark:text-cool-slate-300">{option.label}</span>
-                      </label>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Submit Button */}
-                <button
-                  type="submit"
-                  className="w-full glass-button bg-gradient-to-r from-accent-blue-600 to-soft-coral-500 text-white hover:from-accent-blue-700 hover:to-soft-coral-600 hover-glow py-4 text-lg"
+              {/* Sandboxed Google Forms Iframe */}
+              <div className="relative">
+                <iframe
+                  src={googleFormUrl}
+                  width="100%"
+                  height="1200"
+                  frameBorder="0"
+                  marginHeight={0}
+                  marginWidth={0}
+                  sandbox="allow-scripts allow-forms allow-same-origin allow-popups"
+                  className="rounded-lg bg-white dark:bg-cool-slate-800"
+                  title="Join Expressive AI Early Access Program"
+                  loading="lazy"
                 >
-                  Get Early Access
-                </button>
-              </form>
+                  {/* Fallback content if iframe is blocked */}
+                  <div className="p-8 text-center">
+                    <p className="text-cool-slate-600 dark:text-cool-slate-300 mb-4">
+                      Unable to load the form. Please visit the link below to sign up for early access.
+                    </p>
+                    <a
+                      href={googleFormUrl.replace('?embedded=true', '')}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="glass-button bg-gradient-to-r from-accent-blue-600 to-soft-coral-500 text-white hover:from-accent-blue-700 hover:to-soft-coral-600 hover-glow inline-flex items-center gap-2"
+                    >
+                      <ExternalLink className="h-4 w-4" />
+                      Open Google Form
+                    </a>
+                  </div>
+                </iframe>
+              </div>
 
               {/* Privacy Note */}
               <div className="mt-6 glass bg-cool-slate-50/50 dark:bg-cool-slate-800/50 rounded-lg p-4">
                 <p className="text-sm text-cool-slate-600 dark:text-cool-slate-300">
                   <strong>Privacy:</strong> We respect your privacy and will never share your information with third parties. 
-                  You can unsubscribe at any time. We'll only send you relevant updates about products you\'re interested in.
+                  You can unsubscribe at any time. We'll only send you relevant updates about products you're interested in.
+                  This form is securely hosted by Google Forms.
                 </p>
               </div>
             </div>

@@ -12,6 +12,7 @@ const About = React.lazy(() => import('./pages/About'));
 const JoinUs = React.lazy(() => import('./pages/JoinUs'));
 const Blog = React.lazy(() => import('./pages/Blog'));
 const Contact = React.lazy(() => import('./pages/Contact'));
+const NotFound = React.lazy(() => import('./pages/NotFound'));
 
 function App() {
   return (
@@ -27,6 +28,8 @@ function App() {
             <Route path="/join" element={<JoinUs />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/contact" element={<Contact />} />
+            {/* Catch-all route for 404 - must be last */}
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
       </Layout>

@@ -34,12 +34,18 @@ const Navigation = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2 group">
             <div className="p-2 glass rounded-xl group-hover:bg-white/20 dark:group-hover:bg-white/10 transition-all duration-300">
-              <Brain className="h-6 w-6 text-accent-blue-600 dark:text-accent-blue-400 group-hover:scale-110 transition-transform" />
+              <img
+                src="/logo.png"
+                alt="Expressive AI Logo"
+                className="h-12 w-12 object-contain group-hover:scale-110 transition-transform"
+              />
             </div>
-            <span className="text-xl font-bold text-cool-slate-900 dark:text-white group-hover:text-accent-blue-600 dark:group-hover:text-accent-blue-400 transition-colors">
+            <span className="text-2xl font-bold text-cool-slate-900 dark:text-white group-hover:text-accent-blue-600 dark:group-hover:text-accent-blue-400 transition-colors">
               Expressive AI
             </span>
           </Link>
+
+
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-1">

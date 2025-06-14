@@ -42,11 +42,17 @@ const Footer = () => {
             {/* Company Info */}
             <div className="lg:col-span-2">
               <div className="flex items-center space-x-2 mb-4">
-                <div className="p-2 glass rounded-xl">
-                  <Brain className="h-6 w-6 text-accent-blue-600 dark:text-accent-blue-400" />
-                </div>
-                <span className="text-xl font-bold">Expressive AI</span>
+                <img
+                  src="/logo.png"
+                  alt="Expressive AI Logo"
+                  className="h-10 w-10 object-contain"
+                />
+                <span className="text-xl font-bold text-cool-slate-900 dark:text-white">
+                  Expressive AI
+                </span>
               </div>
+
+
               <p className="text-cool-slate-600 dark:text-cool-slate-300 mb-6 max-w-md">
                 Empowering creators, thinkers, educators & strategists with ethical, expressive AI tools for Business, Humanities & Thought.
               </p>
