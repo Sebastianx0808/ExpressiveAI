@@ -6,6 +6,7 @@ import LoadingSpinner from './components/LoadingSpinner';
 // Lazy load pages for better performance
 const Home = React.lazy(() => import('./pages/Home'));
 const Products = React.lazy(() => import('./pages/Products'));
+const Portlify = React.lazy(() => import('./pages/Portlify'));
 const Services = React.lazy(() => import('./pages/Services'));
 const About = React.lazy(() => import('./pages/About'));
 const JoinUs = React.lazy(() => import('./pages/JoinUs'));
@@ -20,6 +21,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/products" element={<Products />} />
+            <Route path="/portlify" element={<Portlify />} />
             <Route path="/services" element={<Services />} />
             <Route path="/about" element={<About />} />
             <Route path="/join" element={<JoinUs />} />

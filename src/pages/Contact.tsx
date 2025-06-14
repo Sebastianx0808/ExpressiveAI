@@ -1,278 +1,168 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Clock, Send, MessageSquare, Sparkles } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, Send, MessageSquare, Sparkles, ExternalLink } from 'lucide-react';
 
-const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    company: '',
-    subject: '',
-    message: '',
-    inquiryType: ''
-  });
+import ContactInfoCard from '../components/ContactInfoCard';
+import ActionButton from '../components/ActionButton';
+import FAQItem from '../components/FAQItem';
+import Map from '../components/Map';
+import { FAQItem as FAQItemType } from '../types/contact';
+import '../styles/contact.css';
 
-  const [submitted, setSubmitted] = useState(false);
+const Contact: React.FC = () => {
+  const [openFAQ, setOpenFAQ] = useState<number | null>(null);
 
-  const inquiryTypes = [
-    'General Inquiry',
-    'Product Demo',
-    'Custom Services',
-    'Partnership Opportunity',
-    'Press & Media',
-    'Technical Support',
-    'University Collaboration'
+  const contactInfo = [
+    {
+      icon: Mail,
+      title: "Email",
+      content: "hello@expressiveai.com",
+      subtitle: "We typically respond within 24 hours",
+      bgColor: "bg-accent-blue-500/20",
+      iconColor: "text-accent-blue-600 dark:text-accent-blue-400"
+    },
+    {
+      icon: Phone,
+      title: "Phone",
+      content: "+91 7356711236",
+      subtitle: "To be filled soon",
+      bgColor: "bg-soft-coral-500/20",
+      iconColor: "text-soft-coral-600 dark:text-soft-coral-400"
+    },
+    {
+      icon: MapPin,
+      title: "Location",
+      content: "Bengaluru, India",
+      subtitle: "Remote-first team",
+      bgColor: "bg-green-500/20",
+      iconColor: "text-green-600 dark:text-green-400"
+    },
+    {
+      icon: Clock,
+      title: "Response Time",
+      content: "Within 24 hours",
+      subtitle: "Usually much faster!",
+      bgColor: "bg-purple-500/20",
+      iconColor: "text-purple-600 dark:text-purple-400"
+    }
   ];
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
+  const faqItems: FAQItemType[] = [
+    {
+      question: "How quickly can you respond to custom service requests?",
+      answer: "We typically provide initial consultation and proposal within 48 hours for custom service requests. Project timelines vary based on scope and complexity, but we always provide clear expectations upfront."
+    },
+    {
+      question: "Do you offer educational discounts?",
+      answer: "Yes! We offer special pricing for educational institutions, students, and academic researchers. Our academic programs include up to 50% discounts for qualifying institutions and free access for student research projects."
+    },
+    {
+      question: "Can you integrate with our existing systems?",
+      answer: "Absolutely. Our custom AI solutions are designed to integrate seamlessly with your existing workflows and systems. We work closely with your technical team to ensure smooth implementation with minimal disruption to your current processes."
+    },
+    {
+      question: "What makes your AI approach different?",
+      answer: "We focus specifically on non-STEM domains with a human-centered approach. Our AI tools are designed to enhance creativity and strategic thinking, not replace human expertise. We prioritize interpretability and user control in all our solutions."
+    },
+    {
+      question: "What is your typical project timeline?",
+      answer: "Project timelines vary significantly based on scope. Simple integrations can be completed in 2-4 weeks, while comprehensive custom solutions may take 2-6 months. We provide detailed project roadmaps during our initial consultation."
+    },
+    {
+      question: "Do you provide ongoing support and maintenance?",
+      answer: "Yes, we offer comprehensive support packages including 24/7 monitoring, regular updates, performance optimization, and dedicated technical support. Our support tiers range from basic maintenance to full managed services."
+    },
+    {
+      question: "What data security measures do you implement?",
+      answer: "We follow enterprise-grade security standards including end-to-end encryption, SOC 2 Type II compliance, GDPR compliance, and regular security audits. Your data privacy and security are our top priorities."
+    },
+    {
+      question: "Can you work with small startups or only large enterprises?",
+      answer: "We work with organizations of all sizes! From individual researchers and startups to Fortune 500 companies. We offer flexible engagement models and pricing structures to accommodate different organizational needs and budgets."
+    },
+    {
+      question: "Do you offer training for our team?",
+      answer: "Absolutely! We provide comprehensive training programs including hands-on workshops, documentation, video tutorials, and ongoing coaching to ensure your team can effectively use and maintain our AI solutions."
+    },
+    {
+      question: "What happens if we're not satisfied with the results?",
+      answer: "We stand behind our work with satisfaction guarantees. We offer iterative development with regular checkpoints, and if you're not satisfied, we'll work with you to make it right or provide a refund according to our service agreement terms."
+    }
+  ];
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Contact form submitted:', formData);
-    setSubmitted(true);
-  };
-
-  if (submitted) {
-    return (
-      <div className="min-h-screen gradient-bg flex items-center justify-center py-20">
-        <div className="max-w-md mx-auto text-center">
-          <div className="glass-card p-8">
-            <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Send className="h-8 w-8 text-green-600 dark:text-green-400" />
-            </div>
-            <h2 className="text-2xl font-bold text-cool-slate-900 dark:text-white mb-4">
-              Message Sent!
-            </h2>
-            <p className="text-cool-slate-600 dark:text-cool-slate-300 mb-6">
-              Thank you for reaching out. We'll get back to you within 24 hours.
-            </p>
-            <div className="glass bg-accent-blue-50/50 dark:bg-accent-blue-900/20 rounded-lg p-4">
-              <p className="text-accent-blue-800 dark:text-accent-blue-300 text-sm">
-                For urgent matters, you can reach us directly at hello@expressiveai.com
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  const glassCardClass = "glass-card backdrop-blur-2xl bg-white/10 dark:bg-cool-slate-900/10 border border-white/20 dark:border-cool-slate-700/50 shadow-2xl hover:shadow-3xl transition-all duration-500";
 
   return (
-    <div className="py-20 gradient-bg animate-fade-in">
+    <div className="py-20 gradient-bg animate-fade-in min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+        
+        {/* Header Section */}
         <div className="text-center mb-16 animate-slide-up">
-          <div className="glass-card p-8 max-w-4xl mx-auto">
-            <Sparkles className="h-12 w-12 text-accent-blue-600 dark:text-accent-blue-400 mx-auto mb-6 animate-pulse" />
+          <div className={`${glassCardClass} p-8 max-w-4xl mx-auto`}>
+            <div className="relative">
+              <Sparkles className="h-12 w-12 text-accent-blue-600 dark:text-accent-blue-400 mx-auto mb-6 animate-pulse" />
+              <div className="absolute inset-0 bg-gradient-to-r from-accent-blue-600/20 to-soft-coral-500/20 rounded-full blur-3xl animate-pulse"></div>
+            </div>
             <h1 className="text-4xl md:text-5xl font-bold text-cool-slate-900 dark:text-white mb-6">
-              Let's <span className="gradient-text">Collaborate</span>
+              Let's <span className="gradient-text bg-gradient-to-r from-accent-blue-600 to-soft-coral-500 bg-clip-text text-transparent">Collaborate</span>
             </h1>
-            <p className="text-xl text-cool-slate-600 dark:text-cool-slate-300">
+            <p className="text-xl text-cool-slate-600 dark:text-cool-slate-300 leading-relaxed">
               Ready to explore how AI can transform your work? Whether you're interested in our products, services, or partnerships, we'd love to hear from you.
             </p>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          {/* Contact Information */}
-          <div className="lg:col-span-1">
-            <div className="glass-card p-8 h-fit sticky top-8">
-              <h2 className="text-2xl font-bold text-cool-slate-900 dark:text-white mb-6">
-                Get in Touch
-              </h2>
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+          
+          {/* Contact Information Column */}
+          <div className="space-y-6">
+            <div className={`${glassCardClass} p-8`}>
+              <div className="flex items-center mb-8">
+                <MessageSquare className="h-8 w-8 text-accent-blue-600 dark:text-accent-blue-400 mr-3" />
+                <h2 className="text-2xl font-bold text-cool-slate-900 dark:text-white">Get in Touch</h2>
+              </div>
               
               <div className="space-y-6">
-                <div className="flex items-start space-x-4">
-                  <div className="glass bg-accent-blue-500/20 p-3 rounded-lg">
-                    <Mail className="h-6 w-6 text-accent-blue-600 dark:text-accent-blue-400" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-cool-slate-900 dark:text-white">Email</h3>
-                    <p className="text-cool-slate-600 dark:text-cool-slate-300">hello@expressiveai.com</p>
-                    <p className="text-sm text-cool-slate-500 dark:text-cool-slate-400">We typically respond within 24 hours</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4">
-                  <div className="glass bg-soft-coral-500/20 p-3 rounded-lg">
-                    <Phone className="h-6 w-6 text-soft-coral-600 dark:text-soft-coral-400" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-cool-slate-900 dark:text-white">Phone</h3>
-                    <p className="text-cool-slate-600 dark:text-cool-slate-300">+1 (555) 123-4567</p>
-                    <p className="text-sm text-cool-slate-500 dark:text-cool-slate-400">Mon-Fri, 9AM-6PM PST</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4">
-                  <div className="glass bg-green-500/20 p-3 rounded-lg">
-                    <MapPin className="h-6 w-6 text-green-600 dark:text-green-400" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-cool-slate-900 dark:text-white">Location</h3>
-                    <p className="text-cool-slate-600 dark:text-cool-slate-300">San Francisco, CA</p>
-                    <p className="text-sm text-cool-slate-500 dark:text-cool-slate-400">Remote-first team</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4">
-                  <div className="glass bg-purple-500/20 p-3 rounded-lg">
-                    <Clock className="h-6 w-6 text-purple-600 dark:text-purple-400" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-cool-slate-900 dark:text-white">Response Time</h3>
-                    <p className="text-cool-slate-600 dark:text-cool-slate-300">Within 24 hours</p>
-                    <p className="text-sm text-cool-slate-500 dark:text-cool-slate-400">Usually much faster!</p>
-                  </div>
-                </div>
+                {contactInfo.map((info, index) => (
+                  <ContactInfoCard key={index} {...info} />
+                ))}
               </div>
+            </div>
 
-              {/* Quick Actions */}
-              <div className="mt-8 space-y-3">
-                <a
-                  href="mailto:hello@expressiveai.com"
-                  className="block w-full glass-button bg-gradient-to-r from-accent-blue-600 to-soft-coral-500 text-white hover:from-accent-blue-700 hover:to-soft-coral-600 text-center"
-                >
-                  Send Direct Email
-                </a>
-                <Link
-                  to="/join"
-                  className="block w-full glass-button border-2 border-accent-blue-600 dark:border-accent-blue-400 text-accent-blue-600 dark:text-accent-blue-400 hover:bg-accent-blue-600 hover:text-white dark:hover:bg-accent-blue-400 dark:hover:text-cool-slate-900 text-center"
-                >
-                  Join Early Access
-                </Link>
+            {/* Quick Actions */}
+            <div className={`${glassCardClass} p-6`}>
+              <h3 className="text-lg font-semibold text-cool-slate-900 dark:text-white mb-4">Quick Actions</h3>
+              <div className="space-y-3">
+                <ActionButton href="mailto:hello@expressiveai.com" variant="primary" className="group">
+                  <div className="flex items-center justify-center">
+                    Send Direct Email
+                    <ExternalLink className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </ActionButton>
+                <ActionButton to="/join" variant="secondary" className="group">
+                  <div className="flex items-center justify-center">
+                    Join Early Access
+                    <Sparkles className="ml-2 h-4 w-4 group-hover:rotate-12 transition-transform" />
+                  </div>
+                </ActionButton>
               </div>
             </div>
           </div>
 
-          {/* Contact Form */}
-          <div className="lg:col-span-2">
-            <div className="glass-card p-8">
-              <div className="flex items-center mb-6">
-                <MessageSquare className="h-6 w-6 text-accent-blue-600 dark:text-accent-blue-400 mr-3" />
-                <h2 className="text-2xl font-bold text-cool-slate-900 dark:text-white">
-                  Send us a message
-                </h2>
-              </div>
-              
-              <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Basic Info */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-cool-slate-700 dark:text-cool-slate-300 mb-2">
-                      Full Name *
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      required
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      className="glass-input w-full text-cool-slate-900 dark:text-white"
-                      placeholder="Enter your full name"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-cool-slate-700 dark:text-cool-slate-300 mb-2">
-                      Email Address *
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      required
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      className="glass-input w-full text-cool-slate-900 dark:text-white"
-                      placeholder="your@email.com"
-                    />
-                  </div>
-                </div>
-
-                {/* Company and Inquiry Type */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="company" className="block text-sm font-medium text-cool-slate-700 dark:text-cool-slate-300 mb-2">
-                      Company/Organization
-                    </label>
-                    <input
-                      type="text"
-                      id="company"
-                      name="company"
-                      value={formData.company}
-                      onChange={handleInputChange}
-                      className="glass-input w-full text-cool-slate-900 dark:text-white"
-                      placeholder="Your organization (optional)"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="inquiryType" className="block text-sm font-medium text-cool-slate-700 dark:text-cool-slate-300 mb-2">
-                      Inquiry Type *
-                    </label>
-                    <select
-                      id="inquiryType"
-                      name="inquiryType"
-                      required
-                      value={formData.inquiryType}
-                      onChange={handleInputChange}
-                      className="glass-input w-full text-cool-slate-900 dark:text-white"
-                    >
-                      <option value="">Select inquiry type</option>
-                      {inquiryTypes.map(type => (
-                        <option key={type} value={type}>{type}</option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-
-                {/* Subject */}
-                <div>
-                  <label htmlFor="subject" className="block text-sm font-medium text-cool-slate-700 dark:text-cool-slate-300 mb-2">
-                    Subject *
-                  </label>
-                  <input
-                    type="text"
-                    id="subject"
-                    name="subject"
-                    required
-                    value={formData.subject}
-                    onChange={handleInputChange}
-                    className="glass-input w-full text-cool-slate-900 dark:text-white"
-                    placeholder="Brief subject line"
-                  />
-                </div>
-
-                {/* Message */}
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-cool-slate-700 dark:text-cool-slate-300 mb-2">
-                    Message *
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    required
-                    rows={6}
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    className="glass-input w-full text-cool-slate-900 dark:text-white resize-vertical"
-                    placeholder="Tell us about your project, question, or how we can help..."
-                  />
-                </div>
-
-                {/* Submit Button */}
-                <button
-                  type="submit"
-                  className="w-full glass-button bg-gradient-to-r from-accent-blue-600 to-soft-coral-500 text-white hover:from-accent-blue-700 hover:to-soft-coral-600 hover-glow py-4 text-lg flex items-center justify-center group"
-                >
-                  Send Message
-                  <Send className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                </button>
-              </form>
+          {/* Map Column */}
+          <div className="space-y-6">
+            <div className={`${glassCardClass} p-6`}>
+              <h3 className="font-semibold text-cool-slate-900 dark:text-white mb-4 flex items-center">
+                <MapPin className="h-5 w-5 mr-2 text-accent-blue-600 dark:text-accent-blue-400" />
+                Find Us
+              </h3>
+              <Map 
+                center={[12.9716, 77.5946]} 
+                zoom={12}
+                className="h-64 w-full rounded-lg"
+                showMarker={true}
+                markerPopup="ExpressiveAI - Bengaluru, India"
+              />
             </div>
           </div>
         </div>
@@ -280,45 +170,25 @@ const Contact = () => {
         {/* FAQ Section */}
         <div className="mt-20">
           <div className="text-center mb-12">
-            <div className="glass-card p-6 max-w-2xl mx-auto">
+            <div className={`${glassCardClass} p-6 max-w-2xl mx-auto`}>
               <h2 className="text-3xl font-bold text-cool-slate-900 dark:text-white">
                 Frequently Asked Questions
               </h2>
+              <p className="text-cool-slate-600 dark:text-cool-slate-300 mt-2">
+                Find answers to common questions about our services and processes
+              </p>
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="glass-card p-6">
-              <h3 className="text-lg font-semibold text-cool-slate-900 dark:text-white mb-3">
-                How quickly can you respond to custom service requests?
-              </h3>
-              <p className="text-cool-slate-600 dark:text-cool-slate-300">
-                We typically provide initial consultation and proposal within 48 hours for custom service requests. Project timelines vary based on scope and complexity.
-              </p>
-            </div>
-            <div className="glass-card p-6">
-              <h3 className="text-lg font-semibold text-cool-slate-900 dark:text-white mb-3">
-                Do you offer educational discounts?
-              </h3>
-              <p className="text-cool-slate-600 dark:text-cool-slate-300">
-                Yes! We offer special pricing for educational institutions, students, and academic researchers. Contact us to learn about our academic programs.
-              </p>
-            </div>
-            <div className="glass-card p-6">
-              <h3 className="text-lg font-semibold text-cool-slate-900 dark:text-white mb-3">
-                Can you integrate with our existing systems?
-              </h3>
-              <p className="text-cool-slate-600 dark:text-cool-slate-300">
-                Absolutely. Our custom AI solutions are designed to integrate seamlessly with your existing workflows and systems. We work with your technical team to ensure smooth implementation.
-              </p>
-            </div>
-            <div className="glass-card p-6">
-              <h3 className="text-lg font-semibold text-cool-slate-900 dark:text-white mb-3">
-                What makes your AI approach different?
-              </h3>
-              <p className="text-cool-slate-600 dark:text-cool-slate-300">
-                We focus specifically on non-STEM domains with a human-centered approach. Our AI tools are designed to enhance creativity and strategic thinking, not replace human expertise.
-              </p>
-            </div>
+          <div className="max-w-4xl mx-auto space-y-4">
+            {faqItems.map((item, index) => (
+              <FAQItem
+                key={index}
+                question={item.question}
+                answer={item.answer}
+                isOpen={openFAQ === index}
+                onToggle={() => setOpenFAQ(openFAQ === index ? null : index)}
+              />
+            ))}
           </div>
         </div>
       </div>
