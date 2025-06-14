@@ -151,9 +151,9 @@ const Footer = () => {
                 <li><Link to="/join" className="text-cool-slate-600 dark:text-cool-slate-300 hover:text-accent-blue-600 dark:hover:text-accent-blue-400 transition-colors">Early Access</Link></li>
                 <li><Link to="/about" className="text-cool-slate-600 dark:text-cool-slate-300 hover:text-accent-blue-600 dark:hover:text-accent-blue-400 transition-colors">About Us</Link></li>
                 <li><Link to="/blog" className="text-cool-slate-600 dark:text-cool-slate-300 hover:text-accent-blue-600 dark:hover:text-accent-blue-400 transition-colors">Blog</Link></li>
-                <li><Link to="/page-in-production" className="text-cool-slate-600 dark:text-cool-slate-300 hover:text-accent-blue-600 dark:hover:text-accent-blue-400 transition-colors">Privacy Policy</Link></li>
-                <li><Link to="/page-in-production" className="text-cool-slate-600 dark:text-cool-slate-300 hover:text-accent-blue-600 dark:hover:text-accent-blue-400 transition-colors">Terms of Service</Link></li>
-                <li><Link to="/page-in-production" className="text-cool-slate-600 dark:text-cool-slate-300 hover:text-accent-blue-600 dark:hover:text-accent-blue-400 transition-colors">Help Center</Link></li>
+                <li><Link to="/*" className="text-cool-slate-600 dark:text-cool-slate-300 hover:text-accent-blue-600 dark:hover:text-accent-blue-400 transition-colors">Privacy Policy</Link></li>
+                <li><Link to="/*" className="text-cool-slate-600 dark:text-cool-slate-300 hover:text-accent-blue-600 dark:hover:text-accent-blue-400 transition-colors">Terms of Service</Link></li>
+                <li><Link to="/*" className="text-cool-slate-600 dark:text-cool-slate-300 hover:text-accent-blue-600 dark:hover:text-accent-blue-400 transition-colors">Help Center</Link></li>
               </ul>
             </div>
           </div>
