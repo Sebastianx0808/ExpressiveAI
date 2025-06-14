@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Heart, Target, Users, Award, Sparkles } from 'lucide-react';
+import { Heart, Target, Users, Award, Sparkles, Brain, BookOpen, Lightbulb, TrendingUp } from 'lucide-react';
 
 const About = () => {
   const values = [
@@ -26,24 +26,30 @@ const About = () => {
     }
   ];
 
-  const teamMembers = [
+  const expertiseAreas = [
     {
-      name: "Dr. Sarah Chen",
-      role: "Co-Founder & CEO",
-      background: "Former Stanford researcher with expertise in Human-Computer Interaction and AI Ethics. PhD in Cognitive Science.",
-      image: "https://images.pexels.com/photos/3756679/pexels-photo-3756679.jpeg"
+      icon: <Brain className="h-12 w-12" />,
+      title: "Artificial Intelligence & Machine Learning",
+      description: "Deep expertise in natural language processing, computer vision, and human-AI interaction with 15+ years of combined research experience.",
+      highlights: ["PhD-level AI Research", "Published Academic Papers", "Industry Experience at Top Tech Companies"]
     },
     {
-      name: "Prof. Michael Rodriguez",
-      role: "Co-Founder & CTO",
-      background: "MIT alumnus with 15+ years in AI research. Former Google AI researcher specializing in Natural Language Processing.",
-      image: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg"
+      icon: <BookOpen className="h-12 w-12" />,
+      title: "Educational Technology & Pedagogy",
+      description: "Understanding of learning sciences, educational psychology, and instructional design from leading academic institutions.",
+      highlights: ["Educational Psychology Research", "Curriculum Development", "Learning Assessment Methods"]
     },
     {
-      name: "Dr. Emily Watson",
-      role: "Head of Product",
-      background: "Former product leader at educational technology companies. PhD in Educational Psychology from Harvard.",
-      image: "https://images.pexels.com/photos/3760778/pexels-photo-3760778.jpeg"
+      icon: <Lightbulb className="h-12 w-12" />,
+      title: "Creative & Strategic Thinking",
+      description: "Expertise in design thinking, creative processes, and strategic business analysis across multiple industries.",
+      highlights: ["Human-Computer Interaction", "Design Methodology", "Business Strategy Frameworks"]
+    },
+    {
+      icon: <TrendingUp className="h-12 w-12" />,
+      title: "Product Development & Innovation",
+      description: "Proven track record of building and scaling technology products with a focus on user experience and market fit.",
+      highlights: ["Product Strategy", "User Experience Design", "Agile Development"]
     }
   ];
 
@@ -153,36 +159,37 @@ const About = () => {
           </div>
         </div>
 
-        {/* Team Section */}
+        {/* Our Expertise Section */}
         <div className="mb-20">
           <div className="text-center mb-12">
             <div className="glass-card p-6 max-w-2xl mx-auto">
               <h2 className="text-3xl font-bold text-cool-slate-900 dark:text-white">
-                Meet Our Team
+                Our Expertise
               </h2>
+              <p className="text-cool-slate-600 dark:text-cool-slate-300 mt-3">
+                Built by a team with deep expertise across AI research, education, and product development
+              </p>
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {teamMembers.map((member, index) => (
-              <div key={index} className="glass-card overflow-hidden hover-lift">
-                <div className="relative h-64 overflow-hidden">
-                  <img 
-                    src={member.image} 
-                    alt={member.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {expertiseAreas.map((area, index) => (
+              <div key={index} className="glass-card p-8 hover-lift">
+                <div className="text-accent-blue-600 dark:text-accent-blue-400 mb-6 flex justify-center">
+                  {area.icon}
                 </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-cool-slate-900 dark:text-white mb-1">
-                    {member.name}
-                  </h3>
-                  <p className="text-accent-blue-600 dark:text-accent-blue-400 font-semibold mb-3">
-                    {member.role}
-                  </p>
-                  <p className="text-cool-slate-600 dark:text-cool-slate-300 text-sm">
-                    {member.background}
-                  </p>
+                <h3 className="text-xl font-bold text-cool-slate-900 dark:text-white mb-4 text-center">
+                  {area.title}
+                </h3>
+                <p className="text-cool-slate-600 dark:text-cool-slate-300 mb-6 text-center">
+                  {area.description}
+                </p>
+                <div className="space-y-2">
+                  {area.highlights.map((highlight, idx) => (
+                    <div key={idx} className="flex items-center space-x-2">
+                      <div className="w-2 h-2 bg-gradient-to-r from-accent-blue-500 to-soft-coral-500 rounded-full"></div>
+                      <span className="text-sm text-cool-slate-600 dark:text-cool-slate-300">{highlight}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             ))}
